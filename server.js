@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(cors()); // Activation de CORS pour permettre les requêtes cross-origin
 
 // Connexion à MongoDB Atlas
-mongoose.connect('mongodb+srv://Josue1:12345@cluster0.t1p9v.mongodb.net/clickupSync?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb+srv://Josue1:12345@cluster0.t1p9v.mongodb.net/clickupSync?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true }) 
   .then(() => console.log('MongoDB connecté'))
   .catch(err => console.error('Erreur de connexion à MongoDB:', err));
 
@@ -24,10 +24,15 @@ const Company = mongoose.model('Company', CompanySchema);
 
 // Endpoint Webhook pour recevoir les événements de ClickUp
 app.post('/webhooks/clickup', async (req, res) => {
-  console.log('Webhook reçu:', JSON.stringify(req.body, null, 2)); // Log de la requête webhook reçue
+  // Log de la requête webhook reçue
+  console.log('Webhook reçu:', JSON.stringify(req.body, null, 2)); 
   
   const event = req.body.event;
   const task = req.body.task;
+
+  // Logs supplémentaires pour le traitement
+  console.log("Event : ", event);
+  console.log("Task : ", task);
 
   if (!task) {
     console.log("Erreur : la tâche n'est pas présente dans la requête. Voici le contenu reçu : ", req.body);
@@ -70,6 +75,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Serveur en écoute sur le port ${PORT}`);
 });
+
 
 
 
