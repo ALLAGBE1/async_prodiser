@@ -68,6 +68,7 @@ async function updateTaskInClickUp(company) {
 
 // Fonction pour supprimer une tâche dans ClickUp
 async function deleteTaskInClickUp(clickUpTaskId) {
+    console.log("Delete....................")
   try {
     await axios.delete(`https://api.clickup.com/api/v2/task/${clickUpTaskId}`, {
       headers: {
