@@ -47,6 +47,7 @@ async function createTaskInClickUp(company) {
 
 // Fonction pour mettre à jour une tâche dans ClickUp
 async function updateTaskInClickUp(company) {
+    console.log("Update....................")
   try {
     const response = await axios.put(`https://api.clickup.com/api/v2/task/${company.clickUpId}`, {
       name: company.name,
