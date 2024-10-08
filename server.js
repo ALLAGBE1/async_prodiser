@@ -30,7 +30,7 @@ app.post('/webhooks/clickup', async (req, res) => {
   const task = req.body.task;
 
   if (!task) {
-    console.log("Erreur : la tâche n'est pas présente dans la requête");
+    console.log("Erreur : la tâche n'est pas présente dans la requête. Voici le contenu reçu : ", req.body);
     return res.status(400).send('Erreur : Pas de tâche dans la requête');
   }
 
