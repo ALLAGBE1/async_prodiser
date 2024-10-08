@@ -32,7 +32,7 @@ async function createTaskInClickUp(company) {
     //   status: 'to do' // Statut par défaut lors de la création
     }, {
       headers: {
-        'Authorization': 'Bearer pk_2142013436_CWMVBRU0LW8NUEUT7EBDBOZO0NO2SFQY',
+        'Authorization': 'pk_2142013436_CWMVBRU0LW8NUEUT7EBDBOZO0NO2SFQY',
         'Content-Type': 'application/json',
       },
     });
