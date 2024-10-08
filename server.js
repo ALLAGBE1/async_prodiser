@@ -124,24 +124,50 @@ app.put('/companies/:id', async (req, res) => {
 });
 
 // Endpoint pour supprimer une entreprise (synchro MongoDB -> ClickUp)
+// Endpoint pour supprimer une entreprise (synchro MongoDB -> ClickUp)
 app.delete('/companies/:id', async (req, res) => {
-  try {
-    const company = await Company.findById(req.params.id);
-    if (!company) {
-      return res.status(404).send('Entreprise non trouvée');
+    try {
+      // Récupérer l'entreprise dans MongoDB avec l'ID donné
+      const company = await Company.findById(req.params.id);
+      
+      if (!company) {
+        return res.status(404).send('Entreprise non trouvée');
+      }
+  
+      // Log de l'entreprise trouvée pour débogage
+      console.log('Entreprise trouvée:', company);
+  
+      // Supprimer la tâche dans ClickUp
+      await deleteTaskInClickUp(company.clickUpId);
+  
+      // Supprimer l'entreprise dans MongoDB
+      await Company.findByIdAndDelete(req.params.id); // Utilisation de la méthode recommandée
+  
+      res.status(200).send('Entreprise supprimée');
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'entreprise:', error);
+      res.status(500).send('Erreur lors de la suppression de l\'entreprise');
     }
+  });
+  
+// app.delete('/companies/:id', async (req, res) => {
+//   try {
+//     const company = await Company.findById(req.params.id);
+//     if (!company) {
+//       return res.status(404).send('Entreprise non trouvée');
+//     }
 
-    // Supprimer la tâche dans ClickUp
-    await deleteTaskInClickUp(company.clickUpId);
+//     // Supprimer la tâche dans ClickUp
+//     await deleteTaskInClickUp(company.clickUpId);
 
-    // Supprimer l'entreprise de MongoDB
-    await company.remove();
+//     // Supprimer l'entreprise de MongoDB
+//     await company.remove();
 
-    res.status(200).send('Entreprise supprimée');
-  } catch (error) {
-    res.status(500).send('Erreur lors de la suppression de l\'entreprise');
-  }
-});
+//     res.status(200).send('Entreprise supprimée');
+//   } catch (error) {
+//     res.status(500).send('Erreur lors de la suppression de l\'entreprise');
+//   }
+// });
 
 // Endpoint Webhook pour recevoir les événements de ClickUp (synchro ClickUp -> MongoDB)
 app.post('/webhooks/clickup', async (req, res) => {
