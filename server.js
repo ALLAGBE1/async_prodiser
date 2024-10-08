@@ -26,13 +26,13 @@ const Company = mongoose.model('Company', CompanySchema);
 // Fonction pour créer une tâche dans ClickUp
 async function createTaskInClickUp(company) {
   try {
-    const response = await axios.post('https://api.clickup.com/api/v2/list/{list_id}/task', {
+    const response = await axios.post('https://api.clickup.com/api/v2/list/901204709652/task', {
       name: company.name,
       description: company.description,
-      status: 'to do' // Statut par défaut lors de la création
+    //   status: 'to do' // Statut par défaut lors de la création
     }, {
       headers: {
-        'Authorization': 'Bearer YOUR_CLICKUP_API_TOKEN',
+        'Authorization': 'Bearer pk_2142013436_CWMVBRU0LW8NUEUT7EBDBOZO0NO2SFQY',
         'Content-Type': 'application/json',
       },
     });
@@ -53,7 +53,7 @@ async function updateTaskInClickUp(company) {
       description: company.description,
     }, {
       headers: {
-        'Authorization': 'Bearer YOUR_CLICKUP_API_TOKEN',
+        'Authorization': 'Bearer pk_2142013436_CWMVBRU0LW8NUEUT7EBDBOZO0NO2SFQY',
         'Content-Type': 'application/json',
       },
     });
@@ -70,7 +70,7 @@ async function deleteTaskInClickUp(clickUpTaskId) {
   try {
     await axios.delete(`https://api.clickup.com/api/v2/task/${clickUpTaskId}`, {
       headers: {
-        'Authorization': 'Bearer YOUR_CLICKUP_API_TOKEN',
+        'Authorization': 'Bearer pk_2142013436_CWMVBRU0LW8NUEUT7EBDBOZO0NO2SFQY',
         'Content-Type': 'application/json',
       },
     });
