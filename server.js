@@ -53,7 +53,7 @@ async function updateTaskInClickUp(company) {
       description: company.description,
     }, {
       headers: {
-        'Authorization': 'Bearer pk_2142013436_CWMVBRU0LW8NUEUT7EBDBOZO0NO2SFQY',
+        'Authorization': 'pk_2142013436_CWMVBRU0LW8NUEUT7EBDBOZO0NO2SFQY',
         'Content-Type': 'application/json',
       },
     });
@@ -70,7 +70,7 @@ async function deleteTaskInClickUp(clickUpTaskId) {
   try {
     await axios.delete(`https://api.clickup.com/api/v2/task/${clickUpTaskId}`, {
       headers: {
-        'Authorization': 'Bearer pk_2142013436_CWMVBRU0LW8NUEUT7EBDBOZO0NO2SFQY',
+        'Authorization': 'pk_2142013436_CWMVBRU0LW8NUEUT7EBDBOZO0NO2SFQY',
         'Content-Type': 'application/json',
       },
     });
